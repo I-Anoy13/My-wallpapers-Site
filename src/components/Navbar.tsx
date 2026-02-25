@@ -22,20 +22,20 @@ export default function Navbar() {
       isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group">
           <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:scale-110 transition-transform">
             <Download size={24} />
           </div>
-          <span className={`text-xl font-bold tracking-tight ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
-            Vault<span className="text-indigo-600">4K</span>
-          </span>
+          <div className="flex flex-col">
+            <span className={`text-xl font-bold tracking-tight leading-none ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
+              Wall<span className="text-indigo-600">nexa</span>
+            </span>
+            <span className="text-[10px] font-bold text-indigo-500 mt-0.5">V2.1</span>
+          </div>
         </Link>
-
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           <Link to="/" className={`font-medium hover:text-indigo-600 transition-colors ${isScrolled ? 'text-gray-600' : 'text-white/90'}`}>Explore</Link>
           <Link to="/categories" className={`font-medium hover:text-indigo-600 transition-colors ${isScrolled ? 'text-gray-600' : 'text-white/90'}`}>Categories</Link>
-          
           <div className="flex items-center gap-4 ml-4">
             {user ? (
               <div className="flex items-center gap-4">
@@ -51,7 +51,7 @@ export default function Navbar() {
                   <LogOut size={22} />
                 </button>
                 <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm">
-                  {user.name[0].toUpperCase()}
+                  {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                 </div>
               </div>
             ) : (
@@ -63,14 +63,10 @@ export default function Navbar() {
             )}
           </div>
         </div>
-
-        {/* Mobile Menu Toggle */}
         <button className="md:hidden p-2 text-gray-600" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} className={isScrolled ? 'text-gray-900' : 'text-white'} />}
         </button>
       </div>
-
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
