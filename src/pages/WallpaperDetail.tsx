@@ -85,11 +85,14 @@ export default function WallpaperDetail() {
     }, 1000);
   };
 
-  const handleFinalDownload = async () => {
+const handleFinalDownload = async () => {
+    if (!id || !wallpaper) return;
     try {
-      await axios.post(`/api/wallpapers/${id}/download`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      // 💰 Open Adsterra Smart Link in a new tab
+      window.open('https://openairtowhardworking.com/dcj4amr3?key=9226e6692e1af9062c87eb6f5a125e03', '_blank');
+
+      await wallpaperService.incrementDownload(id);
+      
       // Trigger actual file download
       const link = document.createElement('a');
       link.href = wallpaper.url;
@@ -97,6 +100,7 @@ export default function WallpaperDetail() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      
       setShowAdModal(false);
       fetchWallpaper(); // Refresh stats
     } catch (err) {
